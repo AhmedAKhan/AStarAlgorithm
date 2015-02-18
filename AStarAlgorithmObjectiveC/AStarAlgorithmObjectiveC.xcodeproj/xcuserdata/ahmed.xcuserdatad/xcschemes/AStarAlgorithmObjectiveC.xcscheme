@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E2E3309A1A9533FE008DF7F6"
+               BlueprintIdentifier = "E2E330CE1A95350F008DF7F6"
                BuildableName = "AStarAlgorithmObjectiveC.app"
                BlueprintName = "AStarAlgorithmObjectiveC"
                ReferencedContainer = "container:AStarAlgorithmObjectiveC.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E2E330B51A9533FE008DF7F6"
+               BlueprintIdentifier = "E2E330EC1A95350F008DF7F6"
                BuildableName = "AStarAlgorithmObjectiveCTests.xctest"
                BlueprintName = "AStarAlgorithmObjectiveCTests"
                ReferencedContainer = "container:AStarAlgorithmObjectiveC.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E2E330B51A9533FE008DF7F6"
+               BlueprintIdentifier = "E2E330EC1A95350F008DF7F6"
                BuildableName = "AStarAlgorithmObjectiveCTests.xctest"
                BlueprintName = "AStarAlgorithmObjectiveCTests"
                ReferencedContainer = "container:AStarAlgorithmObjectiveC.xcodeproj">
@@ -56,7 +56,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E2E3309A1A9533FE008DF7F6"
+            BlueprintIdentifier = "E2E330CE1A95350F008DF7F6"
             BuildableName = "AStarAlgorithmObjectiveC.app"
             BlueprintName = "AStarAlgorithmObjectiveC"
             ReferencedContainer = "container:AStarAlgorithmObjectiveC.xcodeproj">
@@ -75,7 +75,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E2E3309A1A9533FE008DF7F6"
+            BlueprintIdentifier = "E2E330CE1A95350F008DF7F6"
             BuildableName = "AStarAlgorithmObjectiveC.app"
             BlueprintName = "AStarAlgorithmObjectiveC"
             ReferencedContainer = "container:AStarAlgorithmObjectiveC.xcodeproj">
@@ -93,7 +93,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E2E3309A1A9533FE008DF7F6"
+            BlueprintIdentifier = "E2E330CE1A95350F008DF7F6"
             BuildableName = "AStarAlgorithmObjectiveC.app"
             BlueprintName = "AStarAlgorithmObjectiveC"
             ReferencedContainer = "container:AStarAlgorithmObjectiveC.xcodeproj">
