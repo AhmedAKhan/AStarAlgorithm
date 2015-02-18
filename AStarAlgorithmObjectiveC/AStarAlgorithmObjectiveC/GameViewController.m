@@ -30,6 +30,7 @@
 
 @implementation GameViewController
 
+/*
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -38,7 +39,6 @@
     SKView * skView = (SKView *)self.view;
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
-    /* Sprite Kit applies additional optimizations to improve rendering performance */
     skView.ignoresSiblingOrder = YES;
     
     // Create and configure the scene.
@@ -47,6 +47,25 @@
     
     // Present the scene.
     [skView presentScene:scene];
+}*/
+
+-(void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+    
+    // Configure the view.
+    SKView * skView = (SKView *)self.view;
+    if (!skView.scene) {
+        skView.showsFPS = YES;
+        skView.showsNodeCount = YES;
+        skView.ignoresSiblingOrder = YES;
+        
+        // Create and configure the scene.
+        GameScene *scene = [GameScene sceneWithSize:skView.bounds.size];//[GameScene unarchiveFromFile:@"GameScene"];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        
+        // Present the scene.
+        [skView presentScene:scene];
+    }
 }
 
 - (BOOL)shouldAutorotate

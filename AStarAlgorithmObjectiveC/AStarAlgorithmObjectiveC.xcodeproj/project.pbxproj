@@ -16,6 +16,8 @@
 		E2E330E51A95350F008DF7F6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2E330E41A95350F008DF7F6 /* Images.xcassets */; };
 		E2E330E81A95350F008DF7F6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2E330E61A95350F008DF7F6 /* LaunchScreen.xib */; };
 		E2E330F41A95350F008DF7F6 /* AStarAlgorithmObjectiveCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E330F31A95350F008DF7F6 /* AStarAlgorithmObjectiveCTests.m */; };
+		E2E330FF1A953643008DF7F6 /* Tile_15.png in Resources */ = {isa = PBXBuildFile; fileRef = E2E330FD1A953643008DF7F6 /* Tile_15.png */; };
+		E2E331001A953643008DF7F6 /* Tile_15@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E2E330FE1A953643008DF7F6 /* Tile_15@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		E2E330ED1A95350F008DF7F6 /* AStarAlgorithmObjectiveCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AStarAlgorithmObjectiveCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E330F21A95350F008DF7F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2E330F31A95350F008DF7F6 /* AStarAlgorithmObjectiveCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AStarAlgorithmObjectiveCTests.m; sourceTree = "<group>"; };
+		E2E330FD1A953643008DF7F6 /* Tile_15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tile_15.png; sourceTree = "<group>"; };
+		E2E330FE1A953643008DF7F6 /* Tile_15@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tile_15@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 				E2E330E11A95350F008DF7F6 /* Main.storyboard */,
 				E2E330E41A95350F008DF7F6 /* Images.xcassets */,
 				E2E330E61A95350F008DF7F6 /* LaunchScreen.xib */,
+				E2E330FD1A953643008DF7F6 /* Tile_15.png */,
+				E2E330FE1A953643008DF7F6 /* Tile_15@2x.png */,
 				E2E330D21A95350F008DF7F6 /* Supporting Files */,
 			);
 			path = AStarAlgorithmObjectiveC;
@@ -208,8 +214,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E330E81A95350F008DF7F6 /* LaunchScreen.xib in Resources */,
+				E2E330FF1A953643008DF7F6 /* Tile_15.png in Resources */,
 				E2E330E51A95350F008DF7F6 /* Images.xcassets in Resources */,
 				E2E330DD1A95350F008DF7F6 /* GameScene.sks in Resources */,
+				E2E331001A953643008DF7F6 /* Tile_15@2x.png in Resources */,
 				E2E330E31A95350F008DF7F6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
