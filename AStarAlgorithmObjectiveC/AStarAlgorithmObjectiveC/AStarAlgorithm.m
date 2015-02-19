@@ -52,23 +52,19 @@
     CGPoint rightPosition = CGPointMake(pos.x+1, pos.y);
     CGPoint leftPosition = CGPointMake(pos.x-1, pos.y);
     CGPoint possiblePaths[4] = {upPosition, rightPosition, downPosition, leftPosition};
+    //converts everything to a tile and adds it into the possible positions
     for(int counter = 0; counter < 4; counter++){
         //make sure all the positions are possible
-        NSLog(@"counter: %i", counter);
-        NSLog(@"possiblePaths[counter]: (%f,%f)", possiblePaths[counter].x, possiblePaths[counter].y);
-        //NSLog(@"[[positions objectAtIndex:possiblePaths[counter].y] objectAtIndex:possiblePaths[counter].x]: %@", [[positions objectAtIndex:possiblePaths[counter].y] objectAtIndex:possiblePaths[counter].x]);
-//        NSLog(@"[[[positions objectAtIndex:possiblePaths[counter].y] objectAtIndex:possiblePaths[counter].x] integerValue]: %li", (long)[[[positions objectAtIndex:possiblePaths[counter].y] objectAtIndex:possiblePaths[counter].x] integerValue]);
-        if([[[positions objectAtIndex:(possiblePaths[counter].y+4)] objectAtIndex:(possiblePaths[counter].x+4)] integerValue] == 0){
-        //        if([[[positions objectAtIndex:(possiblePaths[counter].y objectAtIndex:possiblePaths[counter].x] integerValue]) == 0){
-            //this position is not possible
-            //possiblePaths[counter] = pos;
-            continue;
-        }
+        if(possiblePaths[counter].y >= positions.count || possiblePaths[counter].y < 0) continue;
+        if(possiblePaths[counter].x >= [[positions objectAtIndex:possiblePaths[counter].y] count] || possiblePaths[counter].x < 0) continue;
+        if([[[positions objectAtIndex:(possiblePaths[counter].y+4)] objectAtIndex:(possiblePaths[counter].x+4)] integerValue] == 0) continue;
         
         //the position is possible
         AStarNode * tile = [[AStarNode alloc] initWithPos:possiblePaths[counter] andParent:n];//made the tile
+        NSLog(@"tiles: %@ score: %li", [tile description], (long)[self findFScoreOf:tile]);
         [openList addObject:tile]; //added the tile into the open list
     }
+    NSLog(@"before sorted %@", [openList componentsJoinedByString:@", "]);
     
     //reorder the open list so that the tiles at the bottom have the lowest score
     NSArray * newSortedList = [openList sortedArrayUsingComparator:
@@ -81,10 +77,9 @@
                                     return NSOrderedSame;
                                 }
                             }];
+    NSLog(@"after sorted %@", [openList componentsJoinedByString:@", "]);
     
-    for(int i = 0; i < newSortedList.count; i++){
-        NSLog(@"sortedList: %li", (long)[self findFScoreOf:[newSortedList objectAtIndex:i]]);
-    }
+    //for(int i = 0; i < newSortedList.count; i++){ NSLog(@"sortedList: %li", (long)[self findFScoreOf:[newSortedList objectAtIndex:i]]); }
     //then call the addNode to the tiles that were just added
 }
 
@@ -103,7 +98,6 @@
     [openList removeObject:node];//removed from the open list
     [closedList addObject:node]; // added in the closed list
 }
-
 -(AStarNode *)doesOpenListContainPosition:(CGPoint)position{
     for (AStarNode * n in openList) { if(CGPointEqualToPoint([n getPosition], position)) return n; }
     return nil;
@@ -113,14 +107,14 @@
     return nil;
 }
 
--(NSInteger)findFScoreOf:(AStarNode *)node{
-    return [node getGScore] + [self findHScoreOf:node];
-}
-
+-(NSInteger)findFScoreOf:(AStarNode *)node{ return [node getGScore] + [self findHScoreOf:node]; }
 -(NSInteger)findHScoreOf:(AStarNode *)node{
     CGPoint nodePosition = [node getPosition];
     return abs(destinationPosition.x - nodePosition.x) + abs(destinationPosition.y - nodePosition.y);
 }
+
+
+
 
 -(CGPoint)getNextPositionForPlayer{
     AStarNode * node = [closedList objectAtIndex:closedList.count-1];

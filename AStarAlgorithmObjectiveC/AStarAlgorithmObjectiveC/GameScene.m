@@ -57,13 +57,13 @@ static NSInteger const sizeOfBoard = 9;
         self.backgroundColor = [SKColor whiteColor];
         [self createTheBoardWithSize:size];
         
-        CGPoint playerPosition = CGPointMake(-2, 0);
+        CGPoint playerPosition = CGPointMake(2, 3);
         player = [SKShapeNode shapeNodeWithEllipseOfSize:CGSizeMake(20, 20)];
         player.fillColor = [SKColor redColor];
         player.position = [self converTileToPointToScenePoint:playerPosition];
         [self addChild:player];
         
-        CGPoint destinationPosition = CGPointMake(1, -1);
+        CGPoint destinationPosition = CGPointMake(5, 3);
         destination = [SKShapeNode shapeNodeWithEllipseOfSize:CGSizeMake(20, 20)];
         destination.fillColor = [SKColor blueColor];
         destination.position = [self converTileToPointToScenePoint:destinationPosition];
@@ -93,6 +93,7 @@ static NSInteger const sizeOfBoard = 9;
 }
 
 -(CGPoint)converTileToPointToScenePoint:(CGPoint)point{
+    point = CGPointMake(point.x - 4, point.y - 4);
     int const spaceBetweenTiles = 1;
     CGSize tileSize = CGSizeMake(32, 36);
     return CGPointMake(sceneSize.width/2+point.x*tileSize.width+point.x*spaceBetweenTiles, sceneSize.height/2+point.y*tileSize.height+point.y*spaceBetweenTiles);
@@ -114,7 +115,7 @@ static NSInteger const sizeOfBoard = 9;
             //create the board
             if([[[positions objectAtIndex:verCounter] objectAtIndex:horCounter] integerValue]!= 1) continue;
             SKSpriteNode * tile = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"Tile_15"]];
-            tile.position = [self converTileToPointToScenePoint:CGPointMake(4-horCounter, 4 - verCounter)];
+            tile.position = [self converTileToPointToScenePoint:CGPointMake(horCounter, verCounter)];
             [self addChild:tile];
         }//end for verCounter
     }//end for horCounter
