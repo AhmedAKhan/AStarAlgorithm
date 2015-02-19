@@ -7,13 +7,14 @@
 //
 
 #import "GameScene.h"
+#import "AStarAlgorithm.h"
 
 @interface GameScene (){
     SKShapeNode * player;
     SKShapeNode * destination;
     CGSize sceneSize;
     
-    NSInteger positions[9][9];
+    NSArray * positions;
 }
 @end
 
@@ -24,8 +25,8 @@ static NSInteger const sizeOfBoard = 9;
 
 -(id)initWithSize:(CGSize)size{
     if(self = [super initWithSize:size]){
-        
-        NSInteger pos[9][9] = {   {1, 1, 1, 1, 1, 1, 1, 1, 1},
+        /*
+        NSInteger pos[9][9] = {   {1, 1, 1, 1, 1, 1, 1, 1, 0},
             {1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 0, 1, 1, 1, 1},
             {1, 1, 1, 1, 0, 1, 1, 1, 1},
@@ -39,26 +40,41 @@ static NSInteger const sizeOfBoard = 9;
             for(int c = 0; c < 9; c++){
                 positions[i][c] = pos[i][c];
             }
-        }
-    
+        }*/
+        
+        positions = [NSArray arrayWithObjects:
+                    @[@1, @1, @1, @1, @1, @1, @1, @1, @1],
+                    @[@1, @1, @1, @1, @0, @1, @1, @1, @1],
+                    @[@1, @1, @1, @1, @0, @1, @1, @1, @1],
+                    @[@1, @1, @1, @1, @0, @1, @1, @1, @1],
+                    @[@1, @1, @1, @1, @0, @1, @1, @1, @1],
+                    @[@1, @1, @1, @1, @0, @1, @1, @1, @1],
+                    @[@1, @1, @1, @1, @0, @1, @1, @1, @1],
+                    @[@1, @1, @1, @1, @1, @1, @1, @1, @1],
+                    @[@1, @1, @1, @1, @1, @1, @1, @1, @1], nil];
+        
         sceneSize = size;
         self.backgroundColor = [SKColor whiteColor];
         [self createTheBoardWithSize:size];
         
+        CGPoint playerPosition = CGPointMake(-2, 0);
         player = [SKShapeNode shapeNodeWithEllipseOfSize:CGSizeMake(20, 20)];
         player.fillColor = [SKColor redColor];
-        player.position = [self converTileToPointToScenePoint:CGPointMake(-2,0)];
+        player.position = [self converTileToPointToScenePoint:playerPosition];
         [self addChild:player];
         
+        CGPoint destinationPosition = CGPointMake(1, -1);
         destination = [SKShapeNode shapeNodeWithEllipseOfSize:CGSizeMake(20, 20)];
         destination.fillColor = [SKColor blueColor];
-        destination.position = [self converTileToPointToScenePoint:CGPointMake(1,-1)];
+        destination.position = [self converTileToPointToScenePoint:destinationPosition];
         [self addChild:destination];
+        
+        AStarAlgorithm * solution = [[AStarAlgorithm alloc] initWithPlayer:playerPosition andDestination:destinationPosition andBoard:positions];//[[AStarAlgorithm alloc] initWithPlayer:[player position] andDestination:[player position]];
         
     }
     return self;
 }
--(NSInteger)getCostOfTileX:(NSInteger)xPos andTileY:(NSInteger)yPos{ return positions[xPos][yPos]; }
+-(NSInteger)getCostOfTileX:(NSInteger)xPos andTileY:(NSInteger)yPos{ return [[[positions objectAtIndex:yPos] objectAtIndex:xPos] integerValue]; }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
@@ -96,14 +112,13 @@ static NSInteger const sizeOfBoard = 9;
     for (int horCounter = 0; horCounter < sizeOfBoard; horCounter++){
         for(int verCounter = 0; verCounter < sizeOfBoard; verCounter++){
             //create the board
-            if(positions[verCounter][horCounter] != 1) continue;
+            if([[[positions objectAtIndex:verCounter] objectAtIndex:horCounter] integerValue]!= 1) continue;
             SKSpriteNode * tile = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"Tile_15"]];
             tile.position = [self converTileToPointToScenePoint:CGPointMake(4-horCounter, 4 - verCounter)];
             [self addChild:tile];
         }//end for verCounter
     }//end for horCounter
 }//end func
-
 
 -(void)update:(CFTimeInterval)currentTime {
     

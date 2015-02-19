@@ -10,6 +10,6 @@
 
 @interface GameScene : SKScene
 
--(NSInteger)getCostOfTile:(CGPoint)pos;
+-(NSInteger)getCostOfTileX:(NSInteger)xPos andTileY:(NSInteger)yPos;
 
 @end

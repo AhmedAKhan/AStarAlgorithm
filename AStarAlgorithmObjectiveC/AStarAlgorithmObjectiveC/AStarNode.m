@@ -9,7 +9,7 @@
 #import "AStarNode.h"
 
 @interface AStarNode (){
-    CGPoint position;
+    CGPoint tilePosition;
     AStarNode * parent;
     NSInteger gScore;
 }
@@ -20,7 +20,7 @@
 
 -(id)initWithPos:(CGPoint)pos andParent:(AStarNode *)par{
     if(self = [super init]){
-        position = pos;
+        tilePosition = pos;
         parent = par;
         if(parent == NULL) gScore = 1;
         else gScore = [parent getGScore] + 1;
@@ -31,7 +31,7 @@
 
 -(id)initWithPos:(CGPoint)pos andParent:(AStarNode *)par andIncreaseGBy:(NSInteger)gIncrementer{
     if(self = [super init]){
-        position = pos;
+        tilePosition = pos;
         parent = par;
         if(parent == NULL) gScore = gIncrementer;
         else gScore = [parent getGScore] + gIncrementer;
@@ -39,7 +39,13 @@
     return self;
 }
 
--(CGPoint)getPosition{ return position; }
+-(void)setParent:(AStarNode *)newParent{ parent = newParent; }
+-(void)setGScore:(NSInteger)newGScore { gScore = newGScore; }
+-(CGPoint)getPosition{ return tilePosition; }
 -(NSInteger)getGScore{ return gScore; }
+
+-(NSString *)description{
+    return [NSString stringWithFormat:@"(score:%li andPos:(%f,%f))", (long)gScore, tilePosition.x, tilePosition.y];
+}
 
 @end

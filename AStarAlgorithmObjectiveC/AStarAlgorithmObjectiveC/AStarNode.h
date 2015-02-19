@@ -15,5 +15,6 @@
 -(id)initWithPos:(CGPoint)pos andParent:(AStarNode *)par;
 -(CGPoint)getPosition;
 -(NSInteger)getGScore;
-
+-(void)setParent:(AStarNode *)newParent;
+-(void)setGScore:(NSInteger)newGScore;
 @end

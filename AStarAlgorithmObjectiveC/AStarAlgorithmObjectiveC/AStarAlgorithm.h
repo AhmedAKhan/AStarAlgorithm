@@ -11,7 +11,7 @@
 
 @interface AStarAlgorithm : NSObject
 
--(id)initWithPlayer:(CGPoint)playerPos andDestination:(CGPoint)desPos;
+-(id)initWithPlayer:(CGPoint)playerPos andDestination:(CGPoint)desPos andBoard:(NSArray *)board;
 -(CGPoint)getNextPositionForPlayer;
 
 @end
