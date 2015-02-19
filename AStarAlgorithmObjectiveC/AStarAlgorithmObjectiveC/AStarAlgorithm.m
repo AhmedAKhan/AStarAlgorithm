@@ -63,7 +63,15 @@
             break;
         }
     }
+    
     NSLog(@"found a solution which is currentNode: %@", [currentNode printPath]);
+    closedList = [NSMutableArray array];
+    openList = [NSMutableArray array];
+    while (currentNode != nil) {
+        [closedList addObject:currentNode];
+        currentNode = [currentNode getParent];
+    }
+    [closedList removeLastObject];
 }
 
 -(void)addAdjacentTilesToOpenListWherePossibleFrom:(AStarNode *)n{
@@ -96,9 +104,7 @@
    // NSLog(@"before sorted %@", [openList componentsJoinedByString:@", "]);
 }
 
--(NSMutableArray *)getPath{
-    
-}
+
 -(void)addNode:(AStarNode *)node toParentIfNecessary:(AStarNode *)parentNode{
 //    if([closedList containsObject:node]) return; // if it already exists in the closed list then ignore the node
     for(AStarNode * currentNode in closedList){
@@ -135,7 +141,10 @@
 
 
 -(CGPoint)getNextPositionForPlayer{
-    AStarNode * node = [closedList objectAtIndex:closedList.count-1];
+    //AStarNode * node = [closedList objectAtIndex:closedList.count-1];
+    //return [node getPosition];
+    AStarNode * node = [closedList lastObject];
+    [closedList removeObject:node];
     return [node getPosition];
 }
 

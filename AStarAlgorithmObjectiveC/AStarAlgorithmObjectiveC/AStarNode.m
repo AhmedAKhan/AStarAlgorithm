@@ -55,6 +55,7 @@
 -(CGPoint)getPosition{ return tilePosition; }
 -(NSInteger)getFScore{ return gScore + (abs(destination.x - tilePosition.x) + abs(destination.y - tilePosition.y)); }
 -(NSInteger)getGScore{ return gScore; }
+-(AStarNode *)getParent{ return parent;}
 -(NSString *)description{
     return [NSString stringWithFormat:@"(score:%li andPos:(%f,%f))", (long)[self getFScore], tilePosition.x, tilePosition.y];
 }
