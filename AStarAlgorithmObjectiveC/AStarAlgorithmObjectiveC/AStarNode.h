@@ -11,10 +11,14 @@
 
 @interface AStarNode : NSObject
 
+-(id)initWithPos:(CGPoint)pos andParent:(AStarNode *)par toDestination:(CGPoint)des;
 -(id)initWithPos:(CGPoint)pos andParent:(AStarNode *)par andIncreaseGBy:(NSInteger)gIncrementer;
 -(id)initWithPos:(CGPoint)pos andParent:(AStarNode *)par;
+//-(id)initWithPos:(CGPoint)pos andParent:(AStarNode *)par andfScore:(NSInteger)newfScore;
 -(CGPoint)getPosition;
+-(NSInteger)getFScore;
 -(NSInteger)getGScore;
 -(void)setParent:(AStarNode *)newParent;
+-(void)setFScore:(NSInteger)newFScore;
 -(void)setGScore:(NSInteger)newGScore;
 @end

@@ -29,9 +29,9 @@
         //tiles = board;
         positions = board;
         destinationPosition = desPos;
-        [openList addObject:[[AStarNode alloc] initWithPos:playerPos andParent:NULL]];
+        [openList addObject:[[AStarNode alloc] initWithPos:playerPos andParent:NULL toDestination:destinationPosition]];
         NSLog(@"%@", [openList componentsJoinedByString:@", "]);
-        [self fillOpenListFrom:[openList objectAtIndex:0]];
+        [self addAdjacentTilesToOpenListWherePossibleFrom:[openList objectAtIndex:0]];
         [self findSolution];
     }
     return self;
@@ -43,7 +43,7 @@
     
 }
 
--(void)fillOpenListFrom:(AStarNode *)n{
+-(void)addAdjacentTilesToOpenListWherePossibleFrom:(AStarNode *)n{
     CGPoint pos = [n getPosition];
     
     //add all the adjacent tiles to the open list
@@ -60,24 +60,24 @@
         if([[[positions objectAtIndex:(possiblePaths[counter].y+4)] objectAtIndex:(possiblePaths[counter].x+4)] integerValue] == 0) continue;
         
         //the position is possible
-        AStarNode * tile = [[AStarNode alloc] initWithPos:possiblePaths[counter] andParent:n];//made the tile
+        //AStarNode * tile = [[AStarNode alloc] initWithPos:possiblePaths[counter] andParent:n];//made the tile
+        AStarNode * tile = [[AStarNode alloc] initWithPos:possiblePaths[counter] andParent:n toDestination:destinationPosition];
         NSLog(@"tiles: %@ score: %li", [tile description], (long)[self findFScoreOf:tile]);
         [openList addObject:tile]; //added the tile into the open list
     }
     NSLog(@"before sorted %@", [openList componentsJoinedByString:@", "]);
     
     //reorder the open list so that the tiles at the bottom have the lowest score
-    NSArray * newSortedList = [openList sortedArrayUsingComparator:
-                            ^NSComparisonResult(id obj1, id obj2) {
-                                if ([self findFScoreOf:obj1] < [self findFScoreOf:obj2]) {
-                                    return NSOrderedAscending;
-                                } else if ([self findFScoreOf:obj1] > [self findFScoreOf:obj2]) {
-                                    return NSOrderedDescending;
-                                } else {
-                                    return NSOrderedSame;
-                                }
-                            }];
-    NSLog(@"after sorted %@", [openList componentsJoinedByString:@", "]);
+    /*NSArray * newSortedList = [openList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            if ([self findFScoreOf:obj1] < [self findFScoreOf:obj2]) { return NSOrderedAscending;
+            } else if ([self findFScoreOf:obj1] > [self findFScoreOf:obj2]) { return NSOrderedDescending;
+            } else { return NSOrderedSame; } }];*/
+    NSArray * newSortedList = [openList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
+        if([obj1 getFScore] < [obj2 getFScore]) return NSOrderedAscending;
+        if([obj1 getFScore] > [obj2 getFScore]) return NSOrderedDescending;
+        return NSOrderedSame; }];
+    
+    NSLog(@"after sorted %@", [newSortedList componentsJoinedByString:@", "]);
     
     //for(int i = 0; i < newSortedList.count; i++){ NSLog(@"sortedList: %li", (long)[self findFScoreOf:[newSortedList objectAtIndex:i]]); }
     //then call the addNode to the tiles that were just added
