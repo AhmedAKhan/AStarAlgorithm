@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E205B0421A954901005FC496 /* AStarAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = E205B0411A954901005FC496 /* AStarAlgorithm.m */; };
+		E205B0451A955DDE005FC496 /* AStarNode.m in Sources */ = {isa = PBXBuildFile; fileRef = E205B0441A955DDE005FC496 /* AStarNode.m */; };
 		E2E330D51A95350F008DF7F6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E330D41A95350F008DF7F6 /* main.m */; };
 		E2E330D81A95350F008DF7F6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E330D71A95350F008DF7F6 /* AppDelegate.m */; };
 		E2E330DB1A95350F008DF7F6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E330DA1A95350F008DF7F6 /* GameScene.m */; };
@@ -31,6 +33,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E205B0401A954901005FC496 /* AStarAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AStarAlgorithm.h; sourceTree = "<group>"; };
+		E205B0411A954901005FC496 /* AStarAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AStarAlgorithm.m; sourceTree = "<group>"; };
+		E205B0431A955DDE005FC496 /* AStarNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AStarNode.h; sourceTree = "<group>"; };
+		E205B0441A955DDE005FC496 /* AStarNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AStarNode.m; sourceTree = "<group>"; };
 		E2E330CF1A95350F008DF7F6 /* AStarAlgorithmObjectiveC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AStarAlgorithmObjectiveC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E330D31A95350F008DF7F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2E330D41A95350F008DF7F6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -94,6 +100,10 @@
 				E2E330D71A95350F008DF7F6 /* AppDelegate.m */,
 				E2E330D91A95350F008DF7F6 /* GameScene.h */,
 				E2E330DA1A95350F008DF7F6 /* GameScene.m */,
+				E205B0401A954901005FC496 /* AStarAlgorithm.h */,
+				E205B0411A954901005FC496 /* AStarAlgorithm.m */,
+				E205B0431A955DDE005FC496 /* AStarNode.h */,
+				E205B0441A955DDE005FC496 /* AStarNode.m */,
 				E2E330DC1A95350F008DF7F6 /* GameScene.sks */,
 				E2E330DE1A95350F008DF7F6 /* GameViewController.h */,
 				E2E330DF1A95350F008DF7F6 /* GameViewController.m */,
@@ -239,7 +249,9 @@
 				E2E330E01A95350F008DF7F6 /* GameViewController.m in Sources */,
 				E2E330D81A95350F008DF7F6 /* AppDelegate.m in Sources */,
 				E2E330DB1A95350F008DF7F6 /* GameScene.m in Sources */,
+				E205B0451A955DDE005FC496 /* AStarNode.m in Sources */,
 				E2E330D51A95350F008DF7F6 /* main.m in Sources */,
+				E205B0421A954901005FC496 /* AStarAlgorithm.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +444,7 @@
 				E2E330F91A95350F008DF7F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E2E330FA1A95350F008DF7F6 /* Build configuration list for PBXNativeTarget "AStarAlgorithmObjectiveCTests" */ = {
 			isa = XCConfigurationList;
@@ -440,6 +453,7 @@
 				E2E330FC1A95350F008DF7F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

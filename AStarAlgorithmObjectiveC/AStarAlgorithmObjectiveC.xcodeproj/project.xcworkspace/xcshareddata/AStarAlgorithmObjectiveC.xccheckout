@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CB7F2B3E-B327-4AAB-8A9E-BD393FD06820</string>
+	<key>IDESourceControlProjectName</key>
+	<string>AStarAlgorithmObjectiveC</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>EC7A5AE4087A97167EBDD8F24ADB7B5A74E89B1A</key>
+		<string>https://github.com/AhmedAKhan/AStarAlgorithm.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>AStarAlgorithmObjectiveC/AStarAlgorithmObjectiveC.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>EC7A5AE4087A97167EBDD8F24ADB7B5A74E89B1A</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/AhmedAKhan/AStarAlgorithm.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>EC7A5AE4087A97167EBDD8F24ADB7B5A74E89B1A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EC7A5AE4087A97167EBDD8F24ADB7B5A74E89B1A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AStarAlgorithm</string>
+		</dict>
+	</array>
+</dict>
+</plist>

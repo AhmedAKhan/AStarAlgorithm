@@ -12,8 +12,9 @@
     SKShapeNode * player;
     SKShapeNode * destination;
     CGSize sceneSize;
+    
+    NSInteger positions[9][9];
 }
-
 @end
 
 @implementation GameScene
@@ -21,9 +22,25 @@
 //contants
 static NSInteger const sizeOfBoard = 9;
 
-
 -(id)initWithSize:(CGSize)size{
     if(self = [super initWithSize:size]){
+        
+        NSInteger pos[9][9] = {   {1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 1, 1, 1, 0, 1, 1, 1, 1},
+            {1, 1, 1, 1, 0, 1, 1, 1, 1},
+            {1, 1, 1, 1, 0, 1, 1, 1, 1},
+            {1, 1, 1, 1, 0, 1, 1, 1, 1},
+            {1, 1, 1, 1, 0, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1}};
+    
+        for(int i = 0; i < 9; i++){
+            for(int c = 0; c < 9; c++){
+                positions[i][c] = pos[i][c];
+            }
+        }
+    
         sceneSize = size;
         self.backgroundColor = [SKColor whiteColor];
         [self createTheBoardWithSize:size];
@@ -41,7 +58,7 @@ static NSInteger const sizeOfBoard = 9;
     }
     return self;
 }
-
+-(NSInteger)getCostOfTileX:(NSInteger)xPos andTileY:(NSInteger)yPos{ return positions[xPos][yPos]; }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
@@ -55,6 +72,7 @@ static NSInteger const sizeOfBoard = 9;
 }
 
 -(void)playerMoveOnce{
+    
     
 }
 
@@ -74,17 +92,6 @@ static NSInteger const sizeOfBoard = 9;
      3 = enemy type 3
      ... and so on
      */
-    
-    NSInteger positions[9][9] =
-    {   {1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 0, 1, 1, 1, 1},
-        {1, 1, 1, 1, 0, 1, 1, 1, 1},
-        {1, 1, 1, 1, 0, 1, 1, 1, 1},
-        {1, 1, 1, 1, 0, 1, 1, 1, 1},
-        {1, 1, 1, 1, 0, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1}};
     
     for (int horCounter = 0; horCounter < sizeOfBoard; horCounter++){
         for(int verCounter = 0; verCounter < sizeOfBoard; verCounter++){
