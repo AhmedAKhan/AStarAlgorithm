@@ -13,7 +13,7 @@
     NSMutableArray * openList;
     NSMutableArray * closedList;
     CGPoint destinationPosition;
-    
+    AStarNode * playerNode;
     NSArray * positions;
 }
 
@@ -29,9 +29,9 @@
         //tiles = board;
         positions = board;
         destinationPosition = desPos;
-        [openList addObject:[[AStarNode alloc] initWithPos:playerPos andParent:NULL toDestination:destinationPosition]];
-        NSLog(@"%@", [openList componentsJoinedByString:@", "]);
-        [self addAdjacentTilesToOpenListWherePossibleFrom:[openList objectAtIndex:0]];
+        playerNode = [[AStarNode alloc] initWithPos:playerPos andParent:NULL toDestination:destinationPosition];
+        [closedList addObject:playerNode];
+        
         [self findSolution];
     }
     return self;
@@ -39,8 +39,31 @@
 
 -(void)findSolution{
     //check fill open list from
-    
-    
+    AStarNode * currentNode = playerNode;
+    while (true) {
+        NSLog(@"openList: %@", [openList componentsJoinedByString:@", "]);
+        NSLog(@"closed List: %@\n\n", [closedList componentsJoinedByString:@", "]);
+        //find all adjacent tiles add it to the open list, all the adjacent files to the closest thing that was added
+        [self addAdjacentTilesToOpenListWherePossibleFrom:currentNode];
+        
+        //sort open list with F scores
+        NSArray * newSortedList = [openList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
+            if([obj1 getFScore] < [obj2 getFScore]) return NSOrderedAscending;
+            if([obj1 getFScore] > [obj2 getFScore]) return NSOrderedDescending;
+            return NSOrderedSame; }];
+        openList = [NSMutableArray arrayWithArray:newSortedList];
+        
+        //take the one with the lowest F and add it too the closed list
+        //[self addNode:currentNode toParentIfNecessary:currentNode];
+        currentNode =[openList objectAtIndex:0];//got the top element of the open list
+        [closedList addObject:currentNode];//now add it to the closed list
+        [openList removeObject:currentNode];//and remove it from the open list
+        if(CGPointEqualToPoint([currentNode getPosition], destinationPosition)){
+            NSLog(@"found a solution, closed List: %@\n\n", [closedList componentsJoinedByString:@", "]);
+            break;
+        }
+    }
+    NSLog(@"found a solution which is currentNode: %@", [currentNode printPath]);
 }
 
 -(void)addAdjacentTilesToOpenListWherePossibleFrom:(AStarNode *)n{
@@ -57,34 +80,30 @@
         //make sure all the positions are possible
         if(possiblePaths[counter].y >= positions.count || possiblePaths[counter].y < 0) continue;
         if(possiblePaths[counter].x >= [[positions objectAtIndex:possiblePaths[counter].y] count] || possiblePaths[counter].x < 0) continue;
-        if([[[positions objectAtIndex:(possiblePaths[counter].y+4)] objectAtIndex:(possiblePaths[counter].x+4)] integerValue] == 0) continue;
+        if(possiblePaths[counter].x == 4){
+            NSLog(@"point: (%f,%f)  positionsValue: %li", possiblePaths[counter].x, possiblePaths[counter].y, (long)[[[positions objectAtIndex:(possiblePaths[counter].y)] objectAtIndex:(possiblePaths[counter].x)] integerValue]);
+        }
+        if([[[positions objectAtIndex:(possiblePaths[counter].y)] objectAtIndex:(possiblePaths[counter].x)] integerValue] == 0) continue;
+        
         
         //the position is possible
         //AStarNode * tile = [[AStarNode alloc] initWithPos:possiblePaths[counter] andParent:n];//made the tile
         AStarNode * tile = [[AStarNode alloc] initWithPos:possiblePaths[counter] andParent:n toDestination:destinationPosition];
-        NSLog(@"tiles: %@ score: %li", [tile description], (long)[self findFScoreOf:tile]);
-        [openList addObject:tile]; //added the tile into the open list
+        [self addNode:tile toParentIfNecessary:n];
+     //   NSLog(@"tiles: %@ score: %li", [tile description], (long)[self findFScoreOf:tile]);
+        //[openList addObject:tile]; //added the tile into the open list
     }
-    NSLog(@"before sorted %@", [openList componentsJoinedByString:@", "]);
-    
-    //reorder the open list so that the tiles at the bottom have the lowest score
-    /*NSArray * newSortedList = [openList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            if ([self findFScoreOf:obj1] < [self findFScoreOf:obj2]) { return NSOrderedAscending;
-            } else if ([self findFScoreOf:obj1] > [self findFScoreOf:obj2]) { return NSOrderedDescending;
-            } else { return NSOrderedSame; } }];*/
-    NSArray * newSortedList = [openList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
-        if([obj1 getFScore] < [obj2 getFScore]) return NSOrderedAscending;
-        if([obj1 getFScore] > [obj2 getFScore]) return NSOrderedDescending;
-        return NSOrderedSame; }];
-    
-    NSLog(@"after sorted %@", [newSortedList componentsJoinedByString:@", "]);
-    
-    //for(int i = 0; i < newSortedList.count; i++){ NSLog(@"sortedList: %li", (long)[self findFScoreOf:[newSortedList objectAtIndex:i]]); }
-    //then call the addNode to the tiles that were just added
+   // NSLog(@"before sorted %@", [openList componentsJoinedByString:@", "]);
 }
 
+-(NSMutableArray *)getPath{
+    
+}
 -(void)addNode:(AStarNode *)node toParentIfNecessary:(AStarNode *)parentNode{
-    if([closedList containsObject:node]) return; // if it already exists in the closed list then ignore the node
+//    if([closedList containsObject:node]) return; // if it already exists in the closed list then ignore the node
+    for(AStarNode * currentNode in closedList){
+        if(CGPointEqualToPoint([currentNode getPosition], [node getPosition])){ return; }
+    }
     //if it is already exists in the open list update its info if it needs to be updated
     if([openList containsObject:node]){
         if([node getGScore] > [parentNode getGScore] + [[[positions objectAtIndex:[node getPosition].y] objectAtIndex:[node getPosition].x] integerValue]){
@@ -93,10 +112,11 @@
         }
         return;
     }
+    [openList addObject:node];
     //the position is not in the open list or the closed list
     //we must add it into the closed list and remove it from the open list
-    [openList removeObject:node];//removed from the open list
-    [closedList addObject:node]; // added in the closed list
+    //[openList removeObject:node];//removed from the open list
+    //[closedList addObject:node]; // added in the closed list
 }
 -(AStarNode *)doesOpenListContainPosition:(CGPoint)position{
     for (AStarNode * n in openList) { if(CGPointEqualToPoint([n getPosition], position)) return n; }
@@ -112,8 +132,6 @@
     CGPoint nodePosition = [node getPosition];
     return abs(destinationPosition.x - nodePosition.x) + abs(destinationPosition.y - nodePosition.y);
 }
-
-
 
 
 -(CGPoint)getNextPositionForPlayer{

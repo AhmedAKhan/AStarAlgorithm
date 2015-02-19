@@ -21,4 +21,5 @@
 -(void)setParent:(AStarNode *)newParent;
 -(void)setFScore:(NSInteger)newFScore;
 -(void)setGScore:(NSInteger)newGScore;
+-(NSString *)printPath;
 @end

@@ -69,7 +69,8 @@ static NSInteger const sizeOfBoard = 9;
         destination.position = [self converTileToPointToScenePoint:destinationPosition];
         [self addChild:destination];
         
-        AStarAlgorithm * solution = [[AStarAlgorithm alloc] initWithPlayer:playerPosition andDestination:destinationPosition andBoard:positions];//[[AStarAlgorithm alloc] initWithPlayer:[player position] andDestination:[player position]];
+        AStarAlgorithm * solution = [[AStarAlgorithm alloc] initWithPlayer:playerPosition andDestination:destinationPosition andBoard:positions];
+//        AStarAlgorithm * solution = [[AStarAlgorithm alloc] initWithPlayer:[player position] andDestination:[player position]];
         
     }
     return self;

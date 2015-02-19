@@ -58,5 +58,9 @@
 -(NSString *)description{
     return [NSString stringWithFormat:@"(score:%li andPos:(%f,%f))", (long)[self getFScore], tilePosition.x, tilePosition.y];
 }
-
+-(NSString *)printPath{
+    if(parent != nil)
+        return [NSString stringWithFormat:@"%@,%@", [self description], [parent printPath]];
+    return [self description];
+}
 @end
