@@ -15,6 +15,7 @@
     CGSize sceneSize;
     
     NSArray * positions;
+    AStarAlgorithm * solution;
 }
 @end
 
@@ -43,11 +44,11 @@ static NSInteger const sizeOfBoard = 9;
         }*/
         
         positions = [NSArray arrayWithObjects:
-                    @[@1, @1, @1, @1, @1, @1, @1, @1, @1],
                     @[@1, @1, @1, @1, @0, @1, @1, @1, @1],
                     @[@1, @1, @1, @1, @0, @1, @1, @1, @1],
                     @[@1, @1, @1, @1, @0, @1, @1, @1, @1],
                     @[@1, @1, @1, @1, @0, @1, @1, @1, @1],
+                    @[@1, @0, @0, @0, @0, @0, @0, @0, @1],
                     @[@1, @1, @1, @1, @0, @1, @1, @1, @1],
                     @[@1, @1, @1, @1, @0, @1, @1, @1, @1],
                     @[@1, @1, @1, @1, @1, @1, @1, @1, @1],
@@ -69,7 +70,7 @@ static NSInteger const sizeOfBoard = 9;
         destination.position = [self converTileToPointToScenePoint:destinationPosition];
         [self addChild:destination];
         
-        AStarAlgorithm * solution = [[AStarAlgorithm alloc] initWithPlayer:playerPosition andDestination:destinationPosition andBoard:positions];
+        solution = [[AStarAlgorithm alloc] initWithPlayer:playerPosition andDestination:destinationPosition andBoard:positions];
 //        AStarAlgorithm * solution = [[AStarAlgorithm alloc] initWithPlayer:[player position] andDestination:[player position]];
         
     }
@@ -89,7 +90,8 @@ static NSInteger const sizeOfBoard = 9;
 }
 
 -(void)playerMoveOnce{
-    
+    CGPoint newTilePoint = [solution getNextPositionForPlayer];
+    player.position = (newTilePoint.x == -1 && newTilePoint.y == -1)? player.position:[self converTileToPointToScenePoint:newTilePoint];
     
 }
 

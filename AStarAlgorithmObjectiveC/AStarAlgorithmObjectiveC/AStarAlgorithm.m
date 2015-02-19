@@ -26,7 +26,6 @@
         openList = [NSMutableArray array];
         closedList = [NSMutableArray array];
         
-        //tiles = board;
         positions = board;
         destinationPosition = desPos;
         playerNode = [[AStarNode alloc] initWithPos:playerPos andParent:NULL toDestination:destinationPosition];
@@ -41,8 +40,8 @@
     //check fill open list from
     AStarNode * currentNode = playerNode;
     while (true) {
-        NSLog(@"openList: %@", [openList componentsJoinedByString:@", "]);
-        NSLog(@"closed List: %@\n\n", [closedList componentsJoinedByString:@", "]);
+//        NSLog(@"openList: %@", [openList componentsJoinedByString:@", "]);
+//        NSLog(@"closed List: %@\n\n", [closedList componentsJoinedByString:@", "]);
         //find all adjacent tiles add it to the open list, all the adjacent files to the closest thing that was added
         [self addAdjacentTilesToOpenListWherePossibleFrom:currentNode];
         
@@ -59,12 +58,12 @@
         [closedList addObject:currentNode];//now add it to the closed list
         [openList removeObject:currentNode];//and remove it from the open list
         if(CGPointEqualToPoint([currentNode getPosition], destinationPosition)){
-            NSLog(@"found a solution, closed List: %@\n\n", [closedList componentsJoinedByString:@", "]);
+
             break;
         }
     }
     
-    NSLog(@"found a solution which is currentNode: %@", [currentNode printPath]);
+  //  NSLog(@"found a solution which is currentNode: %@", [currentNode printPath]);
     closedList = [NSMutableArray array];
     openList = [NSMutableArray array];
     while (currentNode != nil) {
@@ -141,8 +140,7 @@
 
 
 -(CGPoint)getNextPositionForPlayer{
-    //AStarNode * node = [closedList objectAtIndex:closedList.count-1];
-    //return [node getPosition];
+    if([closedList count] == 0) return CGPointMake(-1,-1);
     AStarNode * node = [closedList lastObject];
     [closedList removeObject:node];
     return [node getPosition];
