@@ -14,4 +14,6 @@
 -(id)initWithPlayer:(CGPoint)playerPos andDestination:(CGPoint)desPos andBoard:(NSArray *)board;
 -(CGPoint)getNextPositionForPlayer;
 
++(NSArray *)getPathFrom:(CGPoint)pos to:(CGPoint)destination andBoard:(NSArray *)board;
+
 @end

@@ -42,7 +42,6 @@ static NSInteger const sizeOfBoard = 9;
                 positions[i][c] = pos[i][c];
             }
         }*/
-        
         positions = [NSArray arrayWithObjects:
                     @[@1, @1, @1, @1, @0, @1, @1, @1, @1],
                     @[@1, @1, @1, @1, @0, @1, @1, @1, @1],
@@ -71,8 +70,16 @@ static NSInteger const sizeOfBoard = 9;
         [self addChild:destination];
         
         solution = [[AStarAlgorithm alloc] initWithPlayer:playerPosition andDestination:destinationPosition andBoard:positions];
-//        AStarAlgorithm * solution = [[AStarAlgorithm alloc] initWithPlayer:[player position] andDestination:[player position]];
-        
+//        NSArray * result = [AStarAlgorithm getPathFrom:playerPosition to:destinationPosition andBoard:positions];
+
+//        NSLog(@"printing result");
+//        NSString * resultAsString = @"";
+//        for (NSValue * val in result) {
+//            CGPoint pos = [val CGPointValue];
+//            resultAsString = [NSString stringWithFormat:@"%@,(%f,%f)",resultAsString, pos.x, pos.y];
+        //}
+        //NSLog(@"%@", resultAsString);
+        //NSLog(@"done printing result");
     }
     return self;
 }

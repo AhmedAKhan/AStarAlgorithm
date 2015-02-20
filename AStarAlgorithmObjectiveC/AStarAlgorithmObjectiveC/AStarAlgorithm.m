@@ -36,6 +36,19 @@
     return self;
 }
 
++(NSArray *)getPathFrom:(CGPoint)pos to:(CGPoint)destination andBoard:(NSArray *)board{
+    AStarAlgorithm * alg = [[AStarAlgorithm alloc] initWithPlayer:pos andDestination:destination andBoard:board];
+    //it found the solution, not lets put all the answers in an array of points
+    NSMutableArray * points = [NSMutableArray array];
+    while (true){
+        CGPoint nextPosition = [alg getNextPositionForPlayer];
+        if(nextPosition.x == -1 && nextPosition.y == -1) break;
+        [points addObject:[NSValue valueWithCGPoint:nextPosition]];
+    }
+    
+    return [NSArray arrayWithArray:points];
+}
+
 -(void)findSolution{
     //check fill open list from
     AStarNode * currentNode = playerNode;
